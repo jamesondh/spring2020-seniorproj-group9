@@ -1,8 +1,8 @@
 {
-  "name": "Start on Heroku: Python",
-  "description": "A barebones Python app, which can easily be deployed to Heroku.",
+  "name": "Senior Project by Group 9 at Kennesaw State University, Spring 2020",
+  "description": "",
   "image": "heroku/python",
-  "repository": "https://github.com/heroku/python-getting-started",
+  "repository": "https://github.com/jamesondh/spring2020-seniorproj-group9",
   "keywords": ["python", "django" ],
   "addons": [ "heroku-postgresql" ],
   "env": {
