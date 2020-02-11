@@ -17,7 +17,7 @@ class Jobs(models.Model):
 	created_date = models.DateTimeField("date created", auto_now_add=True)
 	completed_date = models.DateTimeField("date completed", auto_now_add=False)
 
-class Job_Results(models.model):
+class Job_Results(models.Model):
 	result_id = models.AutoField(primary_key=True)
 	job_id = models.ForeignKey('Jobs', on_delete=models.CASCADE)
 	sentiment_score = models.FloatField()
