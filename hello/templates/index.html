@@ -3,14 +3,14 @@
 
 {% block content %}
 
-<form class="form-inline">
+<form class="form-inline" action="/submit_job/" method="post">{% csrf_token %}
   <div class="form-group mb-2">
     <label for="staticTwitterHashtag" class="sr-only">Enter a Twitter hashtag:</label>
     <input type="text" readonly class="form-control-plaintext" id="staticTwitterHashtag" value="Enter a Twitter hashtag:">
   </div>
   <div class="form-group mx-sm-3 mb-2">
     <label for="inputTwitterHashtag" class="sr-only">#hashtag...</label>
-    <input type="password" class="form-control" id="inputTwitterHashtag" placeholder="#hashtag...">
+    <input type="text" class="form-control" id="inputTwitterHashtag" placeholder="#hashtag...">
   </div>
   <button type="submit" class="btn btn-primary mb-2">Submit</button>
 </form>

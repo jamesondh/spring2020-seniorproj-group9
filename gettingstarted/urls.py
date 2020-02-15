@@ -16,5 +16,7 @@ import hello.views
 
 urlpatterns = [
     path("", hello.views.index, name="index"),
+    path("submit_job/", hello.views.submit_job, name="submit_job"),
+    path("dashboard/", hello.views.dashboard, name="dashboard"),
     path("admin/", admin.site.urls),
 ]
