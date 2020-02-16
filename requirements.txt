@@ -1,3 +1,8 @@
 django
 gunicorn
 django-heroku
+psycopg2-binary
+dj-database-url
+django-extensions
+GetOldTweets3
+afinn
