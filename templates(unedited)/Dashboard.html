@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h4>Main Menu v0.1</h4>
+    <p>Welcome, USERNAMEHERE</p>
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#createjob">Create Job</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#viewjob">View Job</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">User Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="Login.html">Logout</a>
+        </li>
+    </ul>
+
+    <div class="modal" id="createjob">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Create Job</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    This is where the jobs get created.
+                    <div class="form-group">
+                        <label for="tagHash">Enter hashtag:</label>
+                        <input type="text" class="form-control" id="tagHash">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Notes (Optional)</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-info" value="Submit">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    //Table should be on its sections
+    <div class="modal" id="viewjob">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">View Job</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    This is where the jobs get viewed after they're created.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

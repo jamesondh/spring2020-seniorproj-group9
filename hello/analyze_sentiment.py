@@ -2,19 +2,23 @@ import GetOldTweets3 as got
 import os
 from afinn import Afinn
 from hello.models import Job_Results
+from hello.models import Jobs
 from datetime import datetime
+import logging
+
+logger = logging.getLogger(__name__)
 
 def analyze_sentiment(job):
 
+	correspondingJob = Jobs.objects.get(id = job.id)
+
 	# variables
-	afinn = Afinn()
-	# input = job.input_text
-	input = "cheese"
 	records = 5
+	afinn = Afinn()
 
 	#load data as objects
 	tweetCriteria = got.manager.TweetCriteria() \
-					.setQuerySearch(input) \
+					.setQuerySearch(job.input_text) \
 					.setSince("2020-01-01") \
 					.setUntil("2020-09-30") \
 					.setMaxTweets(records)
@@ -36,8 +40,15 @@ def analyze_sentiment(job):
 		tweet_text.append(txt)
 
 	final_score = sum(results) / len(results)
-	r = Job_Results(job_id=job, sentiment_score=final_score, executed_date=datetime.now)
+	completed = datetime.now
 
+	logger.error("input_text : " + correspondingJob.input_text)
+	logger.error("final_score : " + str(final_score))
+
+	r = Job_Results(job_id=correspondingJob, sentiment_score=final_score, executed_date=datetime.now)
+	# r.save()
+
+	return final_score
 
 	#create a dictionary of the results
 	# dct = {'results': results, 'tweet_text':tweet_text}  

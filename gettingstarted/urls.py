@@ -1,6 +1,7 @@
 from django.urls import path, include
 
 from django.contrib import admin
+from hello.views import dashboard
 
 admin.autodiscover()
 
@@ -17,6 +18,8 @@ import hello.views
 urlpatterns = [
     path("", hello.views.index, name="index"),
     path("submit_job/", hello.views.submit_job, name="submit_job"),
-    path("dashboard/", hello.views.dashboard, name="dashboard"),
+    # path("dashboard/", hello.views.dashboard, name="dashboard"),
+    path("dashboard/", dashboard.as_view(), name="dashboard"),
+    # path('dashboard/detail/<int:num>/', views.detail),
     path("admin/", admin.site.urls),
 ]

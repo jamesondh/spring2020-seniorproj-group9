@@ -6,3 +6,4 @@ dj-database-url
 django-extensions
 GetOldTweets3
 afinn
+django-tables2

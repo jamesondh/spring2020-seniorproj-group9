@@ -15,13 +15,13 @@ class Jobs(models.Model):
 	# user_id = models.ForeignKey('Users', on_delete=models.CASCADE)
 	input_text = models.CharField(max_length=50)
 	created_date = models.DateTimeField("date created", auto_now_add=True)
-	completed_date = models.DateTimeField("date completed", auto_now_add=False, null=True)
+	completed_date = models.DateTimeField("date completed", auto_now_add=False, null=True, blank=True)
 	def __str__(self):
 		return self.input_text
 
 class Job_Results(models.Model):
 	job_id = models.ForeignKey('Jobs', on_delete=models.CASCADE)
 	sentiment_score = models.FloatField()
-	executed_date = models.DateTimeField("date executed", auto_now_add=False, null=True)
+	executed_date = models.DateTimeField("date executed", auto_now_add=False, null=True, blank=True)
 	def __str__(self):
-		return self.sentiment_score
+		return str(self.sentiment_score)
