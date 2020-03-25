@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Jobs
 from .models import Job_Results
-from .tables import JobsTable
+from .tables import Job_ResultsTable
 from hello.analyze_sentiment import analyze_sentiment
 from django_tables2 import SingleTableView
 import datetime
@@ -35,12 +35,26 @@ def submit_job(request):
 
 # for viewing jobs
 class dashboard(SingleTableView):
-    table_class = JobsTable
-    queryset = Jobs.objects.all()
+    table_class = Job_ResultsTable
+    queryset = Job_Results.objects.all()
     template_name = "dashboard.html"
 
 # for viewing details of each job
-# def detail(request, job_id)
-# 	return render(request, "detail.html", {
-# 		j: Job_Results(id=job_id)
-# 	})
+def detail(request, job_id):
+	
+	# fetch job_result
+	try:
+		j_res = Job_Results.objects.get(id=job_id)
+	except Job_Results.DoesNotExist:
+		raise Http404("Job result does not exist.")
+
+	# fetch corresponding job
+	try:
+		j = Jobs.objects.get(id=j_res.job_id.id)
+	except Jobs.DoesNotExist:
+		raise Http404("Corresponding job does not exist.")
+
+	return render(request, "detail.html", {
+		'job_result': j_res,
+		'job': j
+	})

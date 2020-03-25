@@ -1,11 +1,11 @@
 from django.urls import path, include
 
 from django.contrib import admin
-from hello.views import dashboard
+from hello import views
 
 admin.autodiscover()
 
-import hello.views
+# from .hello import views
 
 # To add a new path, first import the app:
 # import blog
@@ -16,10 +16,9 @@ import hello.views
 # Learn more here: https://docs.djangoproject.com/en/2.1/topics/http/urls/
 
 urlpatterns = [
-    path("", hello.views.index, name="index"),
-    path("submit_job/", hello.views.submit_job, name="submit_job"),
-    # path("dashboard/", hello.views.dashboard, name="dashboard"),
-    path("dashboard/", dashboard.as_view(), name="dashboard"),
-    # path('dashboard/detail/<int:num>/', views.detail),
+    path("", views.index, name="index"),
+    path("submit_job/", views.submit_job, name="submit_job"),
+    path("dashboard/", views.dashboard.as_view(), name="dashboard"),
+    path('dashboard/detail/<int:job_id>/', views.detail, name="job_detail"),
     path("admin/", admin.site.urls),
 ]

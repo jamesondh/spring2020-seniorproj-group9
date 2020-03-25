@@ -2,7 +2,17 @@
 {% load static %}
 
 {% block content %}
-
-<p>job_id: {{ job.id }}</p>
+<br>
+<div class="container">
+	<div class="card">
+	  <h5 class="card-header">Results for {{ job.input_text }}</h5>
+	  <div class="card-body">
+	    <p class="card-text">Sentiment score: {{ job_result.sentiment_score }}</p>
+	    <p class="card-text">Date created: {{ job.created_date }}</p>
+	    <p class="card-text">Date completed: {{ job.completed_date }}</p>
+	    <a href="../.." class="btn btn-primary">Back to dashboard</a>
+	  </div>
+	</div>
+</div>
 
 {% endblock %}

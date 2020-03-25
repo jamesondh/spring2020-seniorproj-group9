@@ -44,9 +44,10 @@ def analyze_sentiment(job):
 
 	logger.error("input_text : " + correspondingJob.input_text)
 	logger.error("final_score : " + str(final_score))
+	logger.error("executed_date : " + str(datetime.now()))
 
-	r = Job_Results(job_id=correspondingJob, sentiment_score=final_score, executed_date=datetime.now)
-	# r.save()
+	r = Job_Results(job_id=correspondingJob, sentiment_score=final_score, executed_date=datetime.now())
+	r.save()
 
 	return final_score
 
