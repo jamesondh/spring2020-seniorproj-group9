@@ -6,7 +6,7 @@ from .models import Job_Results
 from .tables import Job_ResultsTable
 from hello.analyze_sentiment import analyze_sentiment
 from django_tables2 import SingleTableView
-import datetime
+from django.utils import timezone
 import logging
 
 logger = logging.getLogger(__name__)
@@ -21,10 +21,10 @@ def submit_job(request):
 	if request.method == 'POST':
 		# HttpResponseRedirect('/dashboard/')
 		hashtag = request.POST.get('inputTwitterHashtag')
-		j = Jobs(input_text=hashtag, created_date=datetime.datetime.now())
+		j = Jobs(input_text=hashtag, created_date=timezone.now())
 		j.save()
 		score = analyze_sentiment(j)
-		j.completed_date = datetime.datetime.now()
+		j.completed_date = timezone.now()
 		j.save()
 		success_message = ('The Twitter sentiment score of \"' + j.input_text + \
 			'\" as of ' + str(j.created_date) + ' is ' + str(score))

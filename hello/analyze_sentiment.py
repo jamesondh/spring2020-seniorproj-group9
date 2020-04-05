@@ -3,7 +3,7 @@ import os
 from afinn import Afinn
 from hello.models import Job_Results
 from hello.models import Jobs
-from datetime import datetime
+from django.utils import timezone
 import logging
 
 logger = logging.getLogger(__name__)
@@ -13,7 +13,7 @@ def analyze_sentiment(job):
 	correspondingJob = Jobs.objects.get(id = job.id)
 
 	# variables
-	records = 5
+	records = 10
 	afinn = Afinn()
 
 	#load data as objects
@@ -40,13 +40,12 @@ def analyze_sentiment(job):
 		tweet_text.append(txt)
 
 	final_score = sum(results) / len(results)
-	completed = datetime.now
 
 	logger.error("input_text : " + correspondingJob.input_text)
 	logger.error("final_score : " + str(final_score))
-	logger.error("executed_date : " + str(datetime.now()))
+	logger.error("executed_date : " + str(timezone.now()))
 
-	r = Job_Results(job_id=correspondingJob, sentiment_score=final_score, executed_date=datetime.now())
+	r = Job_Results(job_id=correspondingJob, sentiment_score=final_score, executed_date=timezone.now())
 	r.save()
 
 	return final_score

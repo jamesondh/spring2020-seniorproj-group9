@@ -5,15 +5,14 @@
 {% block content %}
 
 <div class="container">
-    <h4>Main Menu v0.1</h4>
-    <p>Welcome, USERNAMEHERE</p>
-
+	<br>
 	{% if messages %}
 	    {% for message in messages %}
 	        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
 	    {% endfor %}
 	{% endif %}
 
+	<p><i>Create a new job below, or click the ID of an existing job to see its detailed results.</i></p>
 	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createjob"><span class="glyphicon glyphicon-plus"></span> Create job</button>
 
 	<br><br>
