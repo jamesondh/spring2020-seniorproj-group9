@@ -13,6 +13,8 @@
 	    <h1>{{ job_result.sentiment_score }}</h1>
 	    <p class="card-text">Date created: {{ job.created_date|localtime }}</p>
 	    <p class="card-text">Date completed: {{ job.completed_date|localtime }}</p>
+	    <p class="card-text">Tweets analyzed: {{ job_result.samples_collected }}</p>
+	    <p class="card-text">Notes: {{ job.notes }}</p>
 	    <a href="../.." class="btn btn-primary">Back to dashboard</a>
 	  </div>
 	</div>

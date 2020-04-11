@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "hello",
     'django_extensions',
-    'django_tables2'
+    'django_tables2',
+    'background_task'
 ]
 
 MIDDLEWARE = [

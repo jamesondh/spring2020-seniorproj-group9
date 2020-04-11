@@ -3,37 +3,56 @@
 <head>
 <title>Twitter Sentiment Analysis</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="//stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script type="text/javascript" src="//stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
   <style type="text/css">
   </style>
 </head>
 <body>
 
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Twitter Sentiment Analysis</a>
-  <ul class="nav navbar-nav">
-  <a href="dashboard/"><span class="glyphicon glyphicon-home"></span> Dashboard</a>
-  <a href="#"><span class="glyphicon glyphicon-cog"></span> My Account</a>
-</nav> -->
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Twitter Sentiment Analysis</a>
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+  <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-home"></span></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="/dashboard"><span class="glyphicon glyphicon-home"></span> Dashboard</a>
+        <a class="nav-link" href="/dashboard"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"><span class="glyphicon glyphicon-cog"></span> My Account</a>
       </li>
     </ul>
   </div>
+</nav> -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-home"></span> Twitter Sentiment Analyzer</a>
+      <ul class="navbar-nav mr-auto">
+
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><span class="glyphicon glyphicon-cog"></span> Account Settings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/login"><span class="glyphicon glyphicon-log-in"></span> Log In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register"><span class="glyphicon glyphicon-plus-sign"></span> Register</a>
+        </li>
+        {% endif %}
+
+      </ul>
 </nav>
 
 {% block content %}{% endblock %}

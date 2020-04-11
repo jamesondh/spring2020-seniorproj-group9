@@ -5,12 +5,19 @@
 
 <div class="container">
 	<br>
+
+  {% if messages %}
+      {% for message in messages %}
+          <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+      {% endfor %}
+  {% endif %}
+
 	<div class="jumbotron">
 	  <h1 class="display-4">Find out what people are saying about _____.</h1>
 	  <p>Use our service to perform <b>sentiment analysis</b> on any keyword of your choosing using the latest social media data from Twitter.</p>
 	  <br>
-	  <a class="btn btn-primary btn-lg" href="#" role="button">Log-in</a>
-	  <a class="btn btn-primary btn-lg" href="#" role="button">Register</a>
+	  <a class="btn btn-primary btn-lg" href="login/" role="button">Log-in</a>
+	  <a class="btn btn-primary btn-lg" href="register/" role="button">Register</a>
 	</div>
 
 

@@ -13,7 +13,7 @@ def analyze_sentiment(job):
 	correspondingJob = Jobs.objects.get(id = job.id)
 
 	# variables
-	records = 10
+	records = 15
 	afinn = Afinn()
 
 	#load data as objects
@@ -32,6 +32,7 @@ def analyze_sentiment(job):
 		tweet = got.manager.TweetManager.getTweets(tweetCriteria)[i]
 		#get the tweet text
 		txt = tweet.text
+		logger.debug("Tweet " + str(i) + ": " + txt)
 		#score the sentiment analyisis
 		score = int(afinn.score(txt)) 
 		#post resuts to list
@@ -41,12 +42,18 @@ def analyze_sentiment(job):
 
 	final_score = sum(results) / len(results)
 
-	logger.error("input_text : " + correspondingJob.input_text)
-	logger.error("final_score : " + str(final_score))
-	logger.error("executed_date : " + str(timezone.now()))
+	logger.debug("input_text : " + correspondingJob.input_text)
+	logger.debug("final_score : " + str(final_score))
+	logger.debug("executed_date : " + str(timezone.now()))
 
-	r = Job_Results(job_id=correspondingJob, sentiment_score=final_score, executed_date=timezone.now())
+	r = Job_Results(job=correspondingJob,
+	                sentiment_score=final_score,
+	                samples_collected=records,
+	                executed_date=timezone.now())
 	r.save()
+
+	correspondingJob.completed_date = timezone.now()
+	correspondingJob.save()
 
 	return final_score
 
