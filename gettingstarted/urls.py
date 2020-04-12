@@ -21,7 +21,7 @@ urlpatterns = [
     path("register/", views.register_view, name="register"),
     path("submit_job/", views.submit_job, name="submit_job"),
     path("logout/", views.logout_view, name="logout"),
-    path("dashboard/", views.dashboard.as_view(), name="dashboard"),
+    path("dashboard/", views.dashboard, name="dashboard"),
     path('dashboard/detail/<int:job_id>/', views.detail, name="job_detail"),
     path("admin/", admin.site.urls),
 ]

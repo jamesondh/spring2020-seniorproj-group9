@@ -69,9 +69,9 @@ def submit_job(request):
 		hashtag = request.POST.get('inputTwitterHashtag')
 		notes = request.POST.get('notesText')
 		j = Jobs(input_text=hashtag,
-		         user=request.user,
-		         notes=notes,
-		         created_date=timezone.now())
+				 user=request.user,
+				 notes=notes,
+				 created_date=timezone.now())
 		j.save()
 
 		# analyze sentiment and update completion time of job
@@ -85,11 +85,20 @@ def submit_job(request):
 		return HttpResponseRedirect('/dashboard/')
 
 # for viewing jobs
-class dashboard(SingleTableView):
-	# queryset = Job_Results.objects.all()
-	model = Job_Results
-	table_class = Job_ResultsTable
-	template_name = "dashboard.html"
+# class dashboard(SingleTableView):
+# 	# queryset = Job_Results.objects.all()
+# 	model = Job_Results
+# 	table_class = Job_ResultsTable
+# 	template_name = "dashboard.html"
+def dashboard(request):
+	current_user = request.user
+	table = Job_ResultsTable(
+		Job_Results.objects.filter(job__user__exact = current_user).order_by('-executed_date')
+	)
+
+	return render(request, "dashboard.html", {
+		"table": table
+	})
 
 # for viewing details of each job
 def detail(request, job_id):
@@ -120,7 +129,7 @@ def detail(request, job_id):
 from django.contrib.auth import logout
 
 def logout_view(request):
-    logout(request)
-    # Redirect to a success page.
-    messages.info(request, 'You have successfully logged out.')
-    return HttpResponseRedirect('/')
+	logout(request)
+	# Redirect to a success page.
+	messages.info(request, 'You have successfully logged out.')
+	return HttpResponseRedirect('/')
