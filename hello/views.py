@@ -86,8 +86,9 @@ def submit_job(request):
 
 # for viewing jobs
 class dashboard(SingleTableView):
+	# queryset = Job_Results.objects.all()
+	model = Job_Results
 	table_class = Job_ResultsTable
-	queryset = Job_Results.objects.all()
 	template_name = "dashboard.html"
 
 # for viewing details of each job

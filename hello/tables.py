@@ -13,3 +13,4 @@ class Job_ResultsTable(tables.Table):
     class Meta:
         model = Job_Results
         attrs = {"class": "table"}
+        template_name = "django_tables2/bootstrap.html"
