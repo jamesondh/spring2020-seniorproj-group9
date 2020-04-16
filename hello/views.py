@@ -10,6 +10,7 @@ from django.utils import timezone
 import logging
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from background_task import background
 
 logger = logging.getLogger(__name__)
 
@@ -74,22 +75,24 @@ def submit_job(request):
 				 created_date=timezone.now())
 		j.save()
 
-		# analyze sentiment and update completion time of job
-		analyze_sentiment(j)
-		j.completed_date = timezone.now()
-		j.save()
+		queue_job(j.id)
 
 		# output success message and redirect to dashboard
 		success_message = ('Your keyword \"' + j.input_text + '\" has been sent for scraping. Please check back in 5~10 minutes to see the results.')
 		messages.info(request, success_message)
 		return HttpResponseRedirect('/dashboard/')
 
+@background(schedule=60)
+def queue_job(job_id):
+	# retrieve job
+	job = Jobs.objects.get(id__exact=job_id)
+
+	# analyze sentiment and update completion time of job
+	analyze_sentiment(job)
+	job.completed_date = timezone.now()
+	job.save()
+
 # for viewing jobs
-# class dashboard(SingleTableView):
-# 	# queryset = Job_Results.objects.all()
-# 	model = Job_Results
-# 	table_class = Job_ResultsTable
-# 	template_name = "dashboard.html"
 def dashboard(request):
 	current_user = request.user
 	table = Job_ResultsTable(
