@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Jobs
+from .tables import JobsTable
 from .models import Job_Results
 from .tables import Job_ResultsTable
 from hello.analyze_sentiment import analyze_sentiment
@@ -92,7 +93,7 @@ def queue_job(job_id):
 	job.completed_date = timezone.now()
 	job.save()
 
-# for viewing jobs
+# for viewing job results
 def dashboard(request):
 	current_user = request.user
 	table = Job_ResultsTable(
@@ -100,6 +101,17 @@ def dashboard(request):
 	)
 
 	return render(request, "dashboard.html", {
+		"table": table
+	})
+
+# for viewing jobs
+def jobs(request):
+	current_user = request.user
+	table = JobsTable(
+		Jobs.objects.filter(user__exact = current_user).order_by('-completed_date')
+	)
+
+	return render(request, "jobs.html", {
 		"table": table
 	})
 

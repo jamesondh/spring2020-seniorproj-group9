@@ -14,9 +14,9 @@
 
 	{% if user.is_authenticated %}
 		<h2>Welcome, <b>{{ user.username }}</b>!</h2>
-		<p><i>Create a new job below, or click the ID of an existing job to see its detailed results. Click "View all jobs" to see all submitted jobs, including ones that are still executing.</i></p>
+		<p><i>Create a new job below, or click the ID of an existing job to see its detailed results. Click "View results" to see all completed jobs with their corresponding sentiment scores.</i></p>
 		<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createjob"><span class="glyphicon glyphicon-plus"></span> Create job</button>
-		<a href="jobs"><button type="button" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-th-list"></span> View all jobs</button></a>
+		<a href="../dashboard"><button type="button" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-th-list"></span> View results</button></a>
 
 		<br><br>
 
