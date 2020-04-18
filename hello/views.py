@@ -15,6 +15,9 @@ from background_task import background
 
 logger = logging.getLogger(__name__)
 
+# helper function
+def is_not_blank(s):
+    return bool(s and s.strip())
 
 # home page
 def index(request):
@@ -56,6 +59,42 @@ def register_view(request):
 			return HttpResponseRedirect('/dashboard/')
 		else:
 			return render(request, "register.html")
+
+# account settings
+def accountsettings_view(request):
+	if request.user.is_authenticated:
+		current_user = request.user
+		if request.method == 'POST':
+			# get post data load
+			email = request.POST['email']
+			username = request.POST['username']
+			password = request.POST['password']
+
+			# change field values if post data differs from database record
+			if (current_user.email != email) & is_not_blank(email):
+				current_user.email = email
+				# logger.error("Email changed")
+			if (current_user.username != username) & is_not_blank(username):
+				current_user.username = username
+				# logger.error("Username changed")
+			if (current_user.password != password) & is_not_blank(password):
+				current_user.password = password
+				# logger.error("Password changed")
+
+			# save user and relog
+			current_user.save()
+			logout(request)
+			login(request, current_user)
+			
+			messages.info(request, "Account settings successfully updated!")
+			return HttpResponseRedirect('/dashboard/')
+		else:
+			return render(request, "accountsettings.html", {
+				"username" : current_user.username,
+				"email" : current_user.email})
+	else:
+		messages.error(request, 'You must log in to change account settings.')
+		return HttpResponseRedirect('/')
 
 # for submitting jobs
 def submit_job(request):

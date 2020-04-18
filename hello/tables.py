@@ -4,7 +4,6 @@ from django_tables2.utils import A
 from .models import Job_Results
 
 class JobsTable(tables.Table):
-    id = tables.LinkColumn("job_detail", args=[A("id")])
     class Meta:
         model = Jobs
         attrs = {"class": "table"}

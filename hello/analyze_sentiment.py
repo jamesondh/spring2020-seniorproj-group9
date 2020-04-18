@@ -13,7 +13,7 @@ def analyze_sentiment(job):
 	correspondingJob = Jobs.objects.get(id = job.id)
 
 	# variables
-	records = 15
+	records = 25
 	afinn = Afinn()
 
 	#load data as objects

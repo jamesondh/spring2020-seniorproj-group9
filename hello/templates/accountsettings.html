@@ -15,16 +15,19 @@
 	<form action="" method="post">{% csrf_token %}
         <div class="form-group">
             <label for="usr">Username:</label>
-            <input type="text" class="form-control" id="usr" name="username">
+            <input type="text" class="form-control" id="usr" name="username" value="{{username}}">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{email}}">
         </div>
         <div class="form-group">
             <label for="pwd">Password:</label>
             <input type="password" class="form-control" id="pwd" name="password">
         </div>
-        <button class="btn btn-primary" type="submit">Login</button>
+        <button class="btn btn-primary" type="submit">Submit changes</button>
+        <a href="/dashboard"><button class="btn btn-primary" type="submit">Back to dashboard</button></a>
     </form>
-    <br>
-    <p>Don't have an account? <a href="/register/">Sign Up</a></p>
 </div>
 
 {% endblock %}

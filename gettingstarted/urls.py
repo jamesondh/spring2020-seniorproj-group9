@@ -19,6 +19,7 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("login/", views.login_view, name="login"),
     path("register/", views.register_view, name="register"),
+    path("accountsettings/", views.accountsettings_view, name="accountsettings"),
     path("submit_job/", views.submit_job, name="submit_job"),
     path("logout/", views.logout_view, name="logout"),
     path("dashboard/", views.dashboard, name="dashboard"),
